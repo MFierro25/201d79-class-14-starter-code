@@ -9,10 +9,14 @@ const cart = new Cart([]);
 // (the things in the Product.allProducts array) into the drop down list.
 function populateForm() {
 
-  //TODO: Add an <option> tag inside the form's select for each product
+  //DONE: Add an <option> tag inside the form's select for each product
   const selectElement = document.getElementById('items');
-  for (let i in Product.allProducts) {
-
+  for (let product in Product.allProducts) {
+    let optionElem = document.createElement('option');
+    optionElem.textContent = `${Product.allProducts[product].name}`;
+    optionElem.value = `${Product.allProducts[product].name}`;
+    selectElement.appendChild(optionElem);
+  
   }
 
 }
@@ -21,8 +25,8 @@ function populateForm() {
 // object, save the whole thing back to local storage and update the screen
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
-
-  // TODO: Prevent the page from reloading
+  event.preventDefault();
+  // DONE: Prevent the page from reloading
 
   // Do all the things ...
   addSelectedItemToCart();
@@ -32,22 +36,44 @@ function handleSubmit(event) {
 
 }
 
+let selectElem = document.getElementById('items');
+let inputElem = document.getElementById('quantity');
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
+  cart.addItem(selectElem.value, inputElem.value);
   // TODO: suss out the item picked from the select list
   // TODO: get the quantity
   // TODO: using those, add one item to the Cart
+
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+function updateCounter() {
+  let itemCountElem = document.getElementById('itemCount');
+  let itemCount = cart.items.length;
+  itemCountElem.textContent = ` (${itemCount})`;
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
-}
-
+  let itemOrdered = selectElem.value;
+  let numOrdered = inputElem.value;
+  let cartPreviewElem = document.getElementById('cartContents');
+  for(let product of Product.allProducts) {
+    if(itemOrdered === product.name) {
+      //create img element that points us to itemOrdered within Product.allProducts
+      let imgElem = document.createElement('img');
+      imgElem.src = product.filePath;
+      imgElem.classList.add("small");
+      cartPreviewElem.appendChild(imgElem);
+      let pElem = document.createElement('p');
+      pElem.textContent = ` x ${numOrdered}`;
+      cartPreviewElem.appendChild(pElem);
+    }
+  };
+};
 // Set up the "submit" event listener on the form.
 // This is the trigger for the app. When a user "submits" the form, it will
 // Call that handleSubmit method above and kick off the whole process
