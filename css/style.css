@@ -1,3 +1,6 @@
+* {
+    text-align: center;
+}
 body {
     background-color: rgb(0, 54, 54);  
     font-family: Verdana, Arial, sans-serif;
@@ -9,7 +12,11 @@ body {
 
   h1 {
       text-align: center;
-      text-shadow: teal;
+      text-shadow: black;
+      font-size: 40px;
+      text-shadow: 2px 2px 3px teal;
+      padding: 20px;
+      background-color: black;
   }
   main {
       min-height: 800px;
@@ -26,12 +33,36 @@ body {
   }
 
   nav {
-      width: 150px;
+      width: 100%;
       min-height: 50px;
+      padding: 50px;
+      background-color: teal;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 40px;
+      font-style: oblique;
+      background: repeating-radial-gradient(
+          circle,
+          teal,
+          darkslategray 10px,
+          black 10px, 
+          darkslategray 40px
+      );
   }
   ul {
       font-family: cambria;
       padding-left: auto;
       padding-right: auto;
+  }
+  table {
+      margin-left: auto;
+      margin-right: auto;
+      border: teal;
+      border-style:groove;
+      background-color: black;
+  }
+  div.copy {
+      font-size: 20px;
+      margin: 10px;
   }
 /* TODO: Make it awesome */
